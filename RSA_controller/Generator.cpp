@@ -4,6 +4,13 @@ Generator::~Generator() = default;
 
 Generator* Generator::instance = nullptr;
 
+Generator* Generator::getGenerator() {
+    if (!instance) {
+        instance = new Generator();
+    }
+    return instance;
+}
+
 bool Generator::testPrime(cpp_int x) const {
         return miller_rabin_test(x,75);
 }
@@ -30,8 +37,8 @@ cpp_int Generator::bezout(cpp_int a, cpp_int b) const {
         r = newR;
         s = newS;
     }
-    if (r < 0) {
-        r = r + b0;
+    if (p < 0) {
+        p = p + b0;
     }
     return p;
 }
@@ -87,21 +94,14 @@ cpp_int Generator::phi(cpp_int p, cpp_int q) const {
     return (p-1)*(q-1);
 }
 
-Generator* Generator::getGenerator() {
-    if (instance) {
-        instance = new Generator();
-    }
-    return instance;
-}
-
 cpp_int Generator::modularPow(cpp_int a, cpp_int e, cpp_int n) const {
      cpp_int p = 1;
      a = a%n;
      while (e > 0) {
          if (e%2 == 1) {
-             p*=a%n;
+             p = (p*a)%n;
          }
-         a*=a%n;
+         a=(a*a)%n;
          e = e >> 1;
      }
      return p;
@@ -116,10 +116,10 @@ bool Generator::generateKeysFor(UserModel* u) {
      while (pgcd(e, phi) != 1) {
          e = randomBigInteger(2, phi-1);
      }
-     cpp_int d = bezout(e,phi)%phi;
-     PublicKeyModel pub(u,e);
-     PrivateKeyModel priv(u,d);
-     if (testKeys(u,n, phi)) {
+     cpp_int d = bezout(e,phi);
+     u->addPublicKey(new PublicKeyModel(u,e));
+     u->addPrivateKey(new PrivateKeyModel(u,d));
+     if (testKeys(u, phi)) {
           u->setN(n);
           u->setPhi(phi);
           return true;
@@ -127,9 +127,9 @@ bool Generator::generateKeysFor(UserModel* u) {
      u->removeKeys();
      return false;
 }
-bool Generator::testKeys(const UserModel* u, cpp_int n, const cpp_int& phi) const {
-     cpp_int e = u->getPublicKey()->getValue();
-     cpp_int d = u->getPrivateKey()->getValue();
+bool Generator::testKeys(const UserModel* u, const cpp_int& phi) const {
+     const cpp_int e = u->getPublicKey()->getValue();
+     const cpp_int d = u->getPrivateKey()->getValue();
      return e*d%phi == 1;
 }
 

@@ -31,6 +31,6 @@ class Generator {
         bool generateKeysFor(UserModel* u);
         cpp_int hash(QString message, cpp_int n) const;
         cpp_int signMessage(cpp_int hash, PrivateKeyModel* privkey, cpp_int n) const;
-        bool testKeys(const UserModel* u, cpp_int n, const cpp_int& phi) const;
+        bool testKeys(const UserModel* u, const cpp_int& phi) const;
         bool checkSign(cpp_int sign, cpp_int hash, PublicKeyModel* pubkey, cpp_int n) const;
 };

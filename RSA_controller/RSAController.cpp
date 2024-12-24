@@ -13,7 +13,7 @@ RSAController::RSAController(RSAModel* m) {
 
 void RSAController::setKeysFor(UserModel* u) const {
     Generator::getGenerator()->generateKeysFor(u);
-    if (Generator::getGenerator()->testKeys(u, u->getN(), u->getPhi())) {
+    if (Generator::getGenerator()->testKeys(u, u->getPhi())) {
         std::cout << "Test for keys was a success" << std::endl;
     } else {
         std::cout << "Test for keys was a failure" << std::endl;
@@ -61,7 +61,7 @@ void RSAController::sendMessage(UserModel *sender, UserModel *receiver, QString 
 void RSAController::generateCertificate() const {
     UserModel* alice = model->getUser("Alice");
     UserModel* bob = model->getUser("Bob");
-    CAModel* ca = static_cast<CAModel*>(model->getUser("Alice"));
+    CAModel* ca = static_cast<CAModel*>(model->getUser("CA"));
 
     Certificate aliceC = gatherDataForCertificate(alice, ca);
     Certificate bobC = gatherDataForCertificate(bob, ca);

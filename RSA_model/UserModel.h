@@ -34,7 +34,7 @@ class UserModel {
 
         void addPrivateKey(PrivateKeyModel* pk);
         void addPublicKey(PublicKeyModel* pk);
-        void removeKeys() const;
+        void removeKeys();
         bool operator<(const UserModel& other) const;
 };
 

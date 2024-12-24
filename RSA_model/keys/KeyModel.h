@@ -16,7 +16,7 @@ class KeyModel {
         UserModel* getUser();
         cpp_int getValue();
         void setValue(cpp_int v);
-        ~KeyModel();
+        virtual ~KeyModel();
 };
 
 #endif //KEYMODEL_H

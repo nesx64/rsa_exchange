@@ -3,11 +3,12 @@
 #include "keys/PublicKeyModel.h"
 #include "keys/PrivateKeyModel.h"
 
-UserModel::UserModel() = default;
+UserModel::UserModel() : privateKey(nullptr), publicKey(nullptr) {}
 
 UserModel::UserModel(QString n, PrivateKeyModel* pk) {
   name = n;
   privateKey = pk;
+  publicKey = nullptr;
 }
 
 UserModel::UserModel(QString n) {
@@ -52,9 +53,15 @@ void UserModel::addPublicKey(PublicKeyModel* pk) {
   publicKey = pk;
 }
 
-void UserModel::removeKeys() const {
-  delete privateKey;
-  delete publicKey;
+void UserModel::removeKeys() {
+  if (privateKey) {
+    delete privateKey;
+    privateKey = nullptr;
+  }
+  if (publicKey) {
+    delete publicKey;
+    publicKey = nullptr;
+  }
 }
 
 bool UserModel::operator<(const UserModel &other) const {

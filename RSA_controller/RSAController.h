@@ -13,7 +13,7 @@ class RSAController {
     public:
         RSAController();
         ~RSAController();
-        explicit RSAController(RSAModel* m);
+        RSAController(RSAModel* m);
         void setKeysFor(UserModel* u) const;
         void sendMessage(UserModel* sender, UserModel* receiver, QString message) const;
         void generateCertificate() const;
