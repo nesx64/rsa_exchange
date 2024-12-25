@@ -1,5 +1,11 @@
 #include "Generator.hpp"
 
+#include <fstream>
+#include <openssl/sha.h>
+
+#include "RSA_model/keys/PrivateKeyModel.h"
+#include "RSA_model/keys/PublicKeyModel.h"
+
 Generator::~Generator() = default;
 
 Generator* Generator::instance = nullptr;

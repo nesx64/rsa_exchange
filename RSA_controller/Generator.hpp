@@ -1,5 +1,6 @@
 #include "../RSA_model/UserModel.h"
 #include <boost/multiprecision/cpp_int.hpp>
+#include <boost/multiprecision/miller_rabin.hpp>
 
 using namespace boost::multiprecision;
 

@@ -6,6 +6,7 @@
 
 #include "../RSA_controller/Generator.hpp"
 #include "keys/PrivateKeyModel.h"
+#include "keys/PublicKeyModel.h"
 
 CAModel::CAModel() = default;
 CAModel::~CAModel() = default;

@@ -1,5 +1,7 @@
 #include "RSAController.h"
 #include "Generator.hpp"
+#include "RSA_model/keys/PrivateKeyModel.h"
+#include "RSA_model/keys/PublicKeyModel.h"
 
 const std::string RSAController::MESSAGE_SEPARATOR = "::";
 
