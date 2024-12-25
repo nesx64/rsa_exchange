@@ -2,8 +2,13 @@
 #define RSAWINDOW_H
 
 #include <QLabel>
-#include <QMainWindow>
+
 #include "../RSA_controller/RSAController.h"
+#include "RSAClient.h"
+
+namespace Ui {
+    class RSAWindow;
+}
 
 class RSAWindow final : public QMainWindow {
     Q_OBJECT
@@ -13,11 +18,15 @@ class RSAWindow final : public QMainWindow {
             const QString& title = "default_win",
             RSAController* ct = nullptr,
             RSAModel* md = nullptr);
+
         ~RSAWindow() override;
+
     private:
         QLabel* title;
         RSAController* controller;
         RSAModel* model;
+        QSet<RSAClient*> clients;
+        Ui::RSAWindow *ui;
 };
 
 #endif

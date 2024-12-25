@@ -4,6 +4,11 @@ project(RSA_Simulator)
 find_package(Qt6 REQUIRED COMPONENTS Widgets)
 find_package(OpenSSL REQUIRED)
 
+qt_wrap_ui(UI_HEADERS ${CMAKE_SOURCE_DIR}/dev_rsa-ex.ui)
+
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+set(CMAKE_AUTOUIC_SEARCH_PATHS ${CMAKE_SOURCE_DIR})
+
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
@@ -26,7 +31,13 @@ add_executable(RSA_Simulator main.cpp
         RSA_model/Certificate.h
         RSA_controller/Generator.cpp
         RSA_view/RSAWindow.hpp
-        RSA_view/RSAWindow.cpp)
+        RSA_view/RSAWindow.cpp
+        RSA_view/RSAClient.cpp
+        RSA_view/RSAClient.h
+        RSA_model/Message.cpp
+        RSA_model/Message.h
+        ${UI_HEADERS}
+)
 
 target_link_libraries(RSA_Simulator
         Qt6::Widgets

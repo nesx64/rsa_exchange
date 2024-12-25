@@ -23,7 +23,7 @@ int main(int argc, char * argv[]) {
  controller->generateCertificate();
 
  QApplication app(argc,argv);
- RSAWindow window(nullptr,QString("rsa_exchange"), controller, model);
+ RSAWindow window(nullptr,QString("rsa_ex"), controller, model);
  window.show();
 
  return app.exec();
